@@ -54,3 +54,20 @@
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
 }
+
+/* Modals */
+
+.add-input{
+  width: 95%;
+  height: 40px;
+  outline: none;
+  border: 1px solid #676767;
+  border-radius: 0px;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.button-container{
+  text-align: center;
+  margin: 30px;
+}
