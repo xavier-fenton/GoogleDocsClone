@@ -1,10 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot } from 'firebase/firestore'
+
+//Docs Component
 export default function Docs({ database }) {
   const [title, setTitle] = useState('')
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
+  //useRef
+  const isMounted = useRef()
+
+  //getData
+  const getData = () => {
+    onSnapshot(collectionRef, (data) => {
+      console.log(
+        data.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id }
+        })
+      )
+    })
+  }
+  //UseEffect
+  useEffect(() => {
+    getData()
+  })
 
   //database
 
@@ -16,6 +37,7 @@ export default function Docs({ database }) {
     })
       .then(() => {
         alert('Data Added')
+        handleClose()
       })
       .catch(() => {
         alert('Cannot add data')
