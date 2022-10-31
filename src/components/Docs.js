@@ -9,13 +9,16 @@ export default function Docs({ database }) {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  //docsData
+  const [docsData, setDocsData] = useState([])
+
   //useRef
   const isMounted = useRef()
 
   //getData
   const getData = () => {
     onSnapshot(collectionRef, (data) => {
-      console.log(
+      setDocsData(
         data.docs.map((doc) => {
           return { ...doc.data(), id: doc.id }
         })
@@ -24,6 +27,11 @@ export default function Docs({ database }) {
   }
   //UseEffect
   useEffect(() => {
+    if (isMounted.current) {
+      return
+    }
+
+    isMounted.current = true
     getData()
   })
 
@@ -58,6 +66,15 @@ export default function Docs({ database }) {
         setTitle={setTitle}
         addData={addData}
       />
+      <div>
+        {docsData.map((doc) => {
+          return (
+            <div>
+              <p>{doc.title}</p>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
