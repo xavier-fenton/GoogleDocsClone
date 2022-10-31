@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
 import { addDoc, collection, onSnapshot } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 
 //Docs Component
 export default function Docs({ database }) {
@@ -8,7 +9,7 @@ export default function Docs({ database }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-
+  let navigate = useNavigate()
   //docsData
   const [docsData, setDocsData] = useState([])
 
@@ -34,6 +35,11 @@ export default function Docs({ database }) {
     isMounted.current = true
     getData()
   })
+
+  //getID
+  const getID = (id) => {
+    navigate(`/editDocs/${id}`)
+  }
 
   //database
 
@@ -69,7 +75,7 @@ export default function Docs({ database }) {
       <div className="grid-main">
         {docsData.map((doc) => {
           return (
-            <div className="grid-child">
+            <div className="grid-child" onClick={() => getID(doc.id)}>
               <p>{doc.title}</p>
             </div>
           )
