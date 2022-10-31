@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
+// import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 
 const style = {
@@ -16,7 +16,13 @@ const style = {
   p: 5,
 }
 
-export default function ModalComponent({ open, setOpen }) {
+export default function ModalComponent({
+  open,
+  setOpen,
+  title,
+  setTitle,
+  addData,
+}) {
   const handleClose = () => setOpen(false)
 
   return (
@@ -28,9 +34,14 @@ export default function ModalComponent({ open, setOpen }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <input placeholder="Add the Title" className="add-input" />
+          <input
+            placeholder="Add the Title"
+            className="add-input"
+            onChange={(event) => setTitle(event.target.value)}
+            value={title}
+          />
           <div className="button-container">
-            <button className="add-docs">Add</button>
+            <Button className="add-docs">Add</Button>
           </div>
         </Box>
       </Modal>
