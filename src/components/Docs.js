@@ -66,10 +66,10 @@ export default function Docs({ database }) {
         setTitle={setTitle}
         addData={addData}
       />
-      <div>
+      <div className="grid-main">
         {docsData.map((doc) => {
           return (
-            <div>
+            <div className="grid-child">
               <p>{doc.title}</p>
             </div>
           )
