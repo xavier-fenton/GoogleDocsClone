@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+/* Docs Main */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+
+.docs-main{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Doc buttons */
+.add-docs{
+  height: 40px;
+  width: 200px;
+  background-color: #ffc107;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
