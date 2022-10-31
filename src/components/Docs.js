@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Modal from './Modal'
 
-export default function Docs() {
+export default function Docs({ database }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   return (
