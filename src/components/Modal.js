@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-// import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 
 const style = {
@@ -41,7 +41,9 @@ export default function ModalComponent({
             value={title}
           />
           <div className="button-container">
-            <Button className="add-docs">Add</Button>
+            <button className="add-docs" onClick={addData}>
+              Add
+            </button>
           </div>
         </Box>
       </Modal>
