@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
-import { addDoc, collection, onSnapshot } from 'firebase/firestore'
+import { addDoc, collection, doc, onSnapshot } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 
 //Docs Component
