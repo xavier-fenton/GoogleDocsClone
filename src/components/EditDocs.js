@@ -5,19 +5,17 @@ import 'react-quill/dist/quill.snow.css'
 
 //import firebase
 import { updateDoc, collection, doc } from 'firebase/firestore'
-import { database } from '../firebaseConfig'
 
 //
-export default function EditDocs(id) {
+export default function EditDocs({ database }) {
+  //updateDocsData
   const [docsDesc, setDocsDesc] = useState('')
+  const collectionRef = collection(database, 'docsData')
   //getQuillData
   const getQuillData = (value) => {
     setDocsDesc(value)
   }
-  let params = useParams(id)
-
-  //updateDocsData
-  const collectionRef = collection(database, 'docsData')
+  let params = useParams()
 
   //useEff
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function EditDocs(id) {
         .catch(() => {
           alert('Cannot Save')
         })
-    }, 5000)
+    }, 1000)
     return () => clearTimeout(updateDocsData)
   }, [docsDesc])
 
