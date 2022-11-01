@@ -1,28 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-
-//import firebase
 import { updateDoc, collection, doc, onSnapshot } from 'firebase/firestore'
 
-//
+//Component EditDocs
 export default function EditDocs({ database }) {
-  const [documentTitle, setDocumentTitle] = useState('')
-  //updateDocsData
-  const [docsDesc, setDocsDesc] = useState('')
+  const isMounted = useRef()
   const collectionRef = collection(database, 'docsData')
-  //getQuillData
+  let params = useParams()
+  const [documentTitle, setDocumentTitle] = useState('')
+  const [docsDesc, setDocsDesc] = useState('')
   const getQuillData = (value) => {
     setDocsDesc(value)
   }
-  //useParams
-  let params = useParams()
-
-  //useRef
-  const isMounted = useRef()
-
-  //useEff
   useEffect(() => {
     const updateDocsData = setTimeout(() => {
       const document = doc(collectionRef, params.id)
@@ -39,7 +30,6 @@ export default function EditDocs({ database }) {
     return () => clearTimeout(updateDocsData)
   }, [docsDesc])
 
-  //getDATA
   const getData = () => {
     const document = doc(collectionRef, params.id)
     onSnapshot(document, (docs) => {
@@ -47,18 +37,25 @@ export default function EditDocs({ database }) {
       setDocsDesc(docs.data().docsDesc)
     })
   }
+
   useEffect(() => {
     if (isMounted.current) {
       return
     }
+
     isMounted.current = true
     getData()
   }, [])
-  
   return (
-    <div key={docsDesc}>
+    <div className="editDocs-main">
       <h1>{documentTitle}</h1>
-      <ReactQuill value={docsDesc} onChange={getQuillData} />
+      <div className="editDocs-inner">
+        <ReactQuill
+          className="react-quill"
+          value={docsDesc}
+          onChange={getQuillData}
+        />
+      </div>
     </div>
   )
 }
