@@ -48,6 +48,7 @@ export default function Docs({ database }) {
   const addData = () => {
     addDoc(collectionRef, {
       title: title,
+      docsDesc: '',
     })
       .then(() => {
         alert('Data Added')
@@ -81,6 +82,7 @@ export default function Docs({ database }) {
               key={doc.id}
             >
               <p>{doc.title}</p>
+              <div dangerouslySetInnerHTML={{ __html: doc.docsDesc }} />
             </div>
           )
         })}
